@@ -1,6 +1,6 @@
 function love.conf(t)
-  t.window.width = 1208 
-  t.window.height = 720
+  t.window.width = 800
+  t.window.height = 480
   t.console = true
   t.title = "Rattin' arround"
 end

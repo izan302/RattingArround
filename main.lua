@@ -1,16 +1,17 @@
-
 local StateMachine = StateMachine or require "src/FSM/StateMachine"
-local MenuState = MenuState or require "src/FSM/States/GameStates/Menu"
 local PlayState = PlayState or require "src/FSM/States/GameStates/Play"
+local MenuState = MenuState or require "src/FSM/States/GameStates/Menu"
 
 actorList = {}
-
+--[[===========================================================================================================
+                                                  NO TOCAR
+===============================================================================================================]]
 function love.load()
   w, h = love.graphics.getDimensions()
-  
+
   stateMachine = StateMachine()
   stateMachine:addState("play", PlayState())
-  stateMachine:changeState("play")
+  stateMachine:changeState("play") -- Carga el estado "play" para modificar la pantalla de juego, id a "src/FSM/States/GameStates/Play"
 end
 
 function love.update(dt)
