@@ -11,6 +11,9 @@ local Rat = Actor:extend()
 function Rat:new(_x, _y)
     Rat.super.new(self, "src/textures/rat.png", _x, _y, 128)
     self.rot = 0
+    self.collider = world:newBSGRectangleCollider(self.position.x, self.position.y, self.width/2, self.height, 5)
+    self.collider:setFixedRotation(true)
+    self.collider:setCollisionClass("Rat")
 --[[===========================================================================================================
                                             PLAYING STATE
 ===============================================================================================================]]
@@ -19,22 +22,27 @@ function Rat:new(_x, _y)
             self.forward = Vector(0,0)
         end,
         update = function(_, dt) -- Se ejecuta con cada update si el estado está activo
+            self.position.x = self.collider:getX()
+            self.position.y = self.collider:getY()
+
+            local velocidadX = 0
+            local velocidadY = 0
             if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-                self.forward = Vector(0, -1)
-                self.position = self.position+self.forward*self.speed*dt
+                velocidadY = self.speed * -1
             end
             if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
-                self.forward = Vector(0, 1)
-                self.position = self.position+self.forward*self.speed*dt
+                velocidadY = self.speed           
             end
             if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-                self.forward = Vector(1, 0)
-                self.position = self.position+self.forward*self.speed*dt
+                velocidadX = self.speed
             end
             if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-                self.forward = Vector(-1, 0)
-                self.position = self.position+self.forward*self.speed*dt
+                velocidadX = self.speed * -1
             end
+            if self.collider:enter("Door") then
+                self.stateMachine:changeState("infecting")
+            end
+            self.collider:setLinearVelocity(velocidadX, velocidadY)
         end,
         draw = function () -- Se ejecuta con cada draw si el estado está activo
             local xx = self.position.x
@@ -43,6 +51,7 @@ function Rat:new(_x, _y)
             local oy = self.origin.y
             local rr = self.rot
             love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
+            
         end,
         exit = function () -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState() a cualquier otro estado
 
@@ -57,7 +66,9 @@ function Rat:new(_x, _y)
 
         end,
         update = function(_, dt) -- Se ejecuta con cada update si el estado está activo
-
+            if love.keyboard.isDown("escape") then
+                self.stateMachine:changeState("playing")
+            end
         end,
         draw = function () -- Se ejecuta con cada draw si el estado está activo
             local xx = self.position.x
