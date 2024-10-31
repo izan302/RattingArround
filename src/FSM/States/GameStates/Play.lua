@@ -22,7 +22,7 @@ end
 function PlayState:update(dt)
     for _, v in ipairs(actorList) do
         v:update(dt)
-      end
+    end
 end
 
 function PlayState:draw()
