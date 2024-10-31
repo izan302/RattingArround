@@ -6,6 +6,11 @@ local WindField = WindField or require "lib/windfield"
 
 -- Dependencias
 local Actor = Actor or require "src/Actor"
+local Actor = Actor or require "src/actor"
+local Rat = Rat or require "src/Rat"
+local StaticGuard = StaticGuard or require "src/StaticGuard"
+local MovingGuard = MovingGuard or require "src/MovingGuard"
+local House = House or require "src/House"
 
 -- Self
 local Level = Object:extend()
@@ -15,7 +20,9 @@ function Level:new(_map)
     map = Sti(_map)
     world = WindField.newWorld(0, 0)
     map:resize(map.width*32, map.height*32)
-    love.window.setMode(map.width*32, map.height*32)
+    h = map.height*32
+    w = map.height*32
+    love.window.setMode(w, h)
     world:addCollisionClass("Rat")
     world:addCollisionClass("Wall")
     world:addCollisionClass("Door")
