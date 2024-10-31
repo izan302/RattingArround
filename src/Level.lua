@@ -10,10 +10,10 @@ local Actor = Actor or require "src/Actor"
 -- Self
 local Level = Object:extend()
 
-function Level:new()
+function Level:new(_map)
     tx, ty = 0, 0
     world = WindField.newWorld(0, 0)
-    map = Sti("src/Maps/Map_0.lua")
+    map = Sti(_map)
     world:addCollisionClass("Rat")
     world:addCollisionClass("Wall")
     world:addCollisionClass("Door")

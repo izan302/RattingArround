@@ -9,13 +9,13 @@ local Rat = Rat or require "src/Rat"
 local StaticGuard = StaticGuard or require "src/StaticGuard"
 local MovingGuard = MovingGuard or require "src/MovingGuard"
 local House = House or require "src/House"
-local Level1 = Level1 or require "src/Levels/Level1"
+local Level = Level or require "src/Level"
 
 -- Self
 local PlayState = Object:extend()
 
 function PlayState:enter()
-    table.insert(actorList, Level1())
+    actorList["Level"] = Level("src/Maps/Map_0.lua")
     
     love.graphics.setColor(1, 1, 1, 1)
     actorList["Rat"] = Rat(w/2, h/2)
