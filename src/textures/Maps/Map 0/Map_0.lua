@@ -16,7 +16,7 @@ return {
     {
       name = "Tilemap",
       firstgid = 1,
-      filename = "Tilemap.tsx"
+      filename = "../Tilemap.tsx"
     }
   },
   layers = {
