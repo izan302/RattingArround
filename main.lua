@@ -11,7 +11,8 @@ function love.load()
 
   stateMachine = StateMachine()
   stateMachine:addState("play", PlayState())
-  stateMachine:changeState("play") -- Carga el estado "play" para modificar la pantalla de juego, id a "src/FSM/States/GameStates/Play"
+  stateMachine:addState("menu", MenuState())
+  stateMachine:changeState("menu") -- Carga el estado "play" para modificar la pantalla de juego, id a "src/FSM/States/GameStates/Play"
 end
 
 function love.update(dt)
