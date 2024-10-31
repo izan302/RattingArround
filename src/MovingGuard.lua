@@ -21,7 +21,6 @@ self.stateMachine:addState("patrolling", {
         
     end,
     update = function(_, dt) -- Se ejecuta con cada update si el estado está activo
-    print(self.currentPoint)
         local PatrolDirectionX = self.patrolPoints[self.currentPoint].x - self.position.x
         local PatrolDirectionY = self.patrolPoints[self.currentPoint].y - self.position.y
         local distancia = math.sqrt(PatrolDirectionX * PatrolDirectionX + PatrolDirectionY * PatrolDirectionY)
