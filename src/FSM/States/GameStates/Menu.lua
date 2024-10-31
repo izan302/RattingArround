@@ -1,11 +1,10 @@
 local Object = Object or require "lib/object"
-local Menu = Menu or require "lib/menu"
+local Menu = Menu or require "src/menu"
 local MenuState = Object:extend()
 
 function MenuState:enter()
     local menuOptions = {}
-    background = love.graphics.newImage("src/textures/background.jpeg")
-    color = love.graphics.getColor()
+    self.background = love.graphics.newImage("src/textures/background.jpeg")
     table.insert(menuOptions, {text = "PLAY", type = "play", selectable = true})
     table.insert(menuOptions, {text = "EXIT", type = "exit", selectable = true})
     actorList["Menu"] = Menu("Menu.ttf", "Rattin' Around", 50, 30, menuOptions)
@@ -19,7 +18,7 @@ end
 
 function MenuState:draw()
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.draw(background, 0, 0, 0, 1, 0.5)
+    love.graphics.draw(self.background, 0, 0, 0, 1, 0.5)
     love.graphics.setColor(1, 0, 0, 1)
     for _, v in pairs(actorList) do
         v:draw()
@@ -27,7 +26,7 @@ function MenuState:draw()
 end
 
 function MenuState:exit()
-    
+    actorList["Menu"] = nil
 end
 
 return MenuState
