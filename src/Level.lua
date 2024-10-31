@@ -12,12 +12,13 @@ local Level = Object:extend()
 
 function Level:new(_map)
     tx, ty = 0, 0
-    world = WindField.newWorld(0, 0)
     map = Sti(_map)
+    world = WindField.newWorld(0, 0)
+    map:resize(map.width*32, map.height*32)
+    love.window.setMode(map.width*32, map.height*32)
     world:addCollisionClass("Rat")
     world:addCollisionClass("Wall")
     world:addCollisionClass("Door")
-
     self:loadColliders()
 end
 

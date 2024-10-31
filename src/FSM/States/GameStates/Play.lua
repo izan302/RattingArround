@@ -15,7 +15,7 @@ local Level = Level or require "src/Level"
 local PlayState = Object:extend()
 
 function PlayState:enter()
-    actorList["Level"] = Level("src/Maps/Map_0.lua")
+    actorList["Level"] = Level("src/Maps/Map_1.lua")
     
     love.graphics.setColor(1, 1, 1, 1)
     actorList["Rat"] = Rat(w/2, h/2)
