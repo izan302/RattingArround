@@ -13,20 +13,18 @@ local House = House or require "src/House"
 local PlayState = Object:extend()
 
 function PlayState:enter()
-    table.insert(actorList, StaticGuard(w/2, h/2))
-    table.insert(actorList, MovingGuard(w/2-32, h/2, 100))
-    table.insert(actorList, House(w/2, h/2+32))
-    table.insert(actorList, Rat(16,16))
+    love.graphics.setColor(1, 1, 1, 1)
+    actorList["Rat"] = Rat(w/2, h/2)    
 end
 
 function PlayState:update(dt)
-    for _, v in ipairs(actorList) do
+    for _, v in pairs(actorList) do
         v:update(dt)
     end
 end
 
 function PlayState:draw()
-    for _, v in ipairs(actorList) do
+    for _, v in pairs(actorList) do
         v:draw()
     end
 end
