@@ -103,7 +103,6 @@ function Menu:update(dt)
         self.menuCooldown = 0
         if self.menuOptions[self.choice].type == "play" then
             stateMachine:changeState("play")
-            actorList["Menu"] = nil
         elseif self.menuOptions[self.choice].type == "score" then
             
         elseif self.menuOptions[self.choice].type == "exit" then
