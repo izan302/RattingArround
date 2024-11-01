@@ -14,6 +14,17 @@ function Rat:new(_x, _y)
     self.collider = world:newBSGRectangleCollider(self.position.x, self.position.y, self.width/2, self.height, 5)
     self.collider:setFixedRotation(true)
     self.collider:setCollisionClass("Rat")
+
+    -- Rectángulo rojo fijo
+    self.redRectX = 0
+    self.redRectY = 0
+  
+    -- Rectángulo verde en movimiento
+    self.greenRectX = 0
+    self.greenRectY = 0
+    self.greenSpeed = 100  -- Velocidad en píxeles por segundo
+    self.infectedpoints=0
+   
 --[[===========================================================================================================
                                             PLAYING STATE
 ===============================================================================================================]]
@@ -63,12 +74,42 @@ function Rat:new(_x, _y)
 ===============================================================================================================]]
     self.stateMachine:addState("infecting", {
         enter = function() -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState("infecting")
+             -- Coloca de manera random el rectangulo rojo
+            local posX = love.graphics.getWidth() / 2 - 150
+            local posY = love.graphics.getHeight() / 2 - 10
+            self.redRectX = love.math.random(posX, posX + 300 - 30)
+            self.redRectY = love.math.random(posY, posY + 20 - 20)
+
+            self.greenRectX = posX
+            self.greenRectY = posY
 
         end,
         update = function(_, dt) -- Se ejecuta con cada update si el estado está activo
             if love.keyboard.isDown("escape") then
                 self.stateMachine:changeState("playing")
             end
+
+            --Movimiento Rectangulo Verde
+            self.greenRectX = self.greenRectX + self.greenSpeed * dt
+
+            if  self.greenRectX <= love.graphics.getWidth() / 2 - 150 or self.greenRectX+10 >= love.graphics.getWidth() / 2 + 150 then
+                self.greenSpeed = -self.greenSpeed
+            end
+                
+            --SkillChecks
+            local redColisionRect = self.redRectX + 30 -- 30 es la anchura del rectangulo
+            local greenColisionRect = self.greenRectX + 10 -- 30 es la anchura del rectangulo
+            if self.greenRectX < redColisionRect and greenColisionRect > self.redRectX and
+               self.greenRectY == self.redRectY then
+                if love.keyboard.isDown("space") then
+                    --self.infectedpoints = self.infectedpoints + 1
+                    --print (self.infectedpoints)
+                       -- if self.infectedpoints == 5 then 
+                            self.stateMachine:changeState("playing")
+                        --end 
+                end
+            end
+            
         end,
         draw = function () -- Se ejecuta con cada draw si el estado está activo
             local xx = self.position.x
@@ -77,6 +118,22 @@ function Rat:new(_x, _y)
             local oy = self.origin.y
             local rr = self.rot
             love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
+
+            love.graphics.setColor(1, 1, 1) 
+            local posX = love.graphics.getWidth() / 2 - 150
+            local posY = love.graphics.getHeight() / 2 - 10
+            love.graphics.rectangle("fill", posX, posY, 300, 20)
+
+           
+            -- Rectangulo Rojo
+            love.graphics.setColor(1, 0, 0) 
+            love.graphics.rectangle("fill", self.redRectX, self.redRectY, 30, 20)
+            
+            -- Rectangulo Verde
+            love.graphics.setColor(0, 1, 0) 
+            love.graphics.rectangle("fill",self.greenRectX,self.greenRectY, 10, 20)
+            
+            love.graphics.setColor(1, 1, 1, 1)
         end,
         exit = function () -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState() a cualquier otro estado
 
