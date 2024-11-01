@@ -4,6 +4,7 @@ local Vector = Vector or require "lib/vector"
 
 -- Dependencias
 local Actor = Actor or require "src/Actor"
+local Rat = Rat or require "src/Rat"
 
 -- Self
 local MovingGuard = Actor:extend()
@@ -24,13 +25,22 @@ self.stateMachine:addState("patrolling", {
         local PatrolDirectionX = self.patrolPoints[self.currentPoint].x - self.position.x
         local PatrolDirectionY = self.patrolPoints[self.currentPoint].y - self.position.y
         local distancia = math.sqrt(PatrolDirectionX * PatrolDirectionX + PatrolDirectionY * PatrolDirectionY)
+        self.forward.x = PatrolDirectionX / distancia
+        self.forward.y = PatrolDirectionY / distancia
         if distancia > 1 then
-            self.forward = Vector(PatrolDirectionX / distancia, PatrolDirectionY / distancia)
+            self.forward = Vector(self.forward.x, self.forward.y)
             self.rot = math.atan2(PatrolDirectionY, PatrolDirectionX)
             self.position = self.position + self.forward * self.speed * dt
         else
             self:arrivedAtPoint()
         end
+        
+        for _,k in ipairs(actorList) do
+            if k:is(Rat) then
+                k:VisualCheck(self.forward.x, self.forward.y, self.position.x, self.position.y)
+            end
+        end
+
     end,
     draw = function () -- Se ejecuta con cada draw si el estado está activo
         local xx = self.position.x
@@ -84,4 +94,6 @@ function MovingGuard:arrivedAtPoint()
     end
     -- if Point is NOT infected house then move to door and changeState("guarding")
 end
+
+
 return MovingGuard
