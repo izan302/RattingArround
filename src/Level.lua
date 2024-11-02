@@ -62,6 +62,11 @@ function Level:loadColliders()
             newCollider:setCollisionClass("Door")
         end
     end
+    for _, collider in pairs(map.layers["Houses"].objects) do
+        if collider.shape == "rectangle" then
+            table.insert(actorList, House(collider.x, collider.y, collider.width, collider.height))
+        end
+    end
 end
 
 return Level

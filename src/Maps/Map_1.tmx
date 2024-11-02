@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="42">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="51">
  <editorsettings>
   <export target="Map_1.lua" format="lua"/>
  </editorsettings>
@@ -102,7 +102,7 @@
   <object id="18" x="97.5" y="384.273" width="94.5" height="65.5"/>
   <object id="19" x="96.3182" y="96.0076" width="31.2727" height="96"/>
   <object id="20" x="160.227" y="95.5076" width="32" height="96"/>
-  <object id="21" x="97.7273" y="96.0076" width="94.5" height="65.5"/>
+  <object id="21" x="96.0909" y="96.0076" width="96.1364" height="65.5"/>
   <object id="22" x="544.5" y="64.25" width="32" height="96"/>
   <object id="23" x="607.5" y="63.75" width="32" height="96"/>
   <object id="24" x="545" y="64.25" width="94.5" height="65.5"/>
@@ -119,5 +119,11 @@
   <object id="33" x="128.364" y="161.909" width="31.6364" height="8.54545"/>
   <object id="34" x="576" y="130.091" width="31.6364" height="8.54545"/>
   <object id="37" x="608.364" y="419.182" width="31.6364" height="8.54545"/>
+ </objectgroup>
+ <objectgroup id="7" name="Houses" opacity="0">
+  <object id="46" x="96" y="95" width="95.6667" height="97.3333"/>
+  <object id="48" x="95.6667" y="383.333" width="95.6667" height="97.3333"/>
+  <object id="49" x="544.5" y="64.6667" width="95.6667" height="97.3333"/>
+  <object id="50" x="576.167" y="350.667" width="95.6667" height="97.3333"/>
  </objectgroup>
 </map>

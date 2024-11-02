@@ -8,8 +8,10 @@ local Actor = Actor or require "src/Actor"
 -- Self
 local House = Actor:extend()
 
-function House:new(_x, _y)
+function House:new(_x, _y, _width, _height)
     House.super.new(self, "src/textures/house.png", _x, _y)
+    self.width = _width
+    self.height = _height
 --[[===========================================================================================================
                                                 IDLE STATE
 ===============================================================================================================]]
@@ -21,12 +23,7 @@ function House:new(_x, _y)
 
         end,
         draw = function () -- Se ejecuta con cada draw si el estado está activo
-            local xx = self.position.x
-            local ox = self.origin.x
-            local yy = self.position.y
-            local oy = self.origin.y
-            local rr = self.rot
-            love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
+
         end,
         exit = function () -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState() a cualquier otro estado
 
@@ -44,12 +41,7 @@ function House:new(_x, _y)
 
         end,
         draw = function () -- Se ejecuta con cada draw si el estado está activo
-            local xx = self.position.x
-            local ox = self.origin.x
-            local yy = self.position.y
-            local oy = self.origin.y
-            local rr = self.rot
-            love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
+
         end,
         exit = function () -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState() a cualquier otro estado
 
@@ -67,12 +59,7 @@ function House:new(_x, _y)
 
         end,
         draw = function () -- Se ejecuta con cada draw si el estado está activo
-            local xx = self.position.x
-            local ox = self.origin.x
-            local yy = self.position.y
-            local oy = self.origin.y
-            local rr = self.rot
-            love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
+            
         end,
         exit = function () -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState() a cualquier otro estado
 

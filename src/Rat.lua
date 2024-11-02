@@ -13,7 +13,7 @@ function Rat:new(_x, _y)
     self.rot = 0
     self.collider = world:newBSGRectangleCollider(self.position.x, self.position.y, self.width/2, self.height, 5)
     self.collider:setFixedRotation(true)
-    self.collider:setCollisionClass("Rat")
+    self.collider:setCollisionClass("Rat", {ignores = {'Door'}})
 
     -- Rectángulo rojo fijo
     self.redRectX = 0
@@ -53,6 +53,8 @@ function Rat:new(_x, _y)
                 velocidadX = self.speed * -1
             end
             if self.collider:enter("Door") then
+                local other = self.collider:getEnterCollisionData("Door").collider
+                
                 self.stateMachine:changeState("infecting")
             end
             self.collider:setLinearVelocity(velocidadX, velocidadY)
