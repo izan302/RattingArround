@@ -495,7 +495,7 @@ return {
           x = 96,
           y = 95,
           width = 95.6667,
-          height = 97.3333,
+          height = 97.667,
           rotation = 0,
           visible = true,
           properties = {}
@@ -508,7 +508,7 @@ return {
           x = 95.6667,
           y = 383.333,
           width = 95.6667,
-          height = 97.3333,
+          height = 97.333,
           rotation = 0,
           visible = true,
           properties = {}
@@ -521,7 +521,7 @@ return {
           x = 544.5,
           y = 64.6667,
           width = 95.6667,
-          height = 97.3333,
+          height = 97.3337,
           rotation = 0,
           visible = true,
           properties = {}
@@ -534,7 +534,7 @@ return {
           x = 576.167,
           y = 350.667,
           width = 95.6667,
-          height = 97.3333,
+          height = 100,
           rotation = 0,
           visible = true,
           properties = {}
