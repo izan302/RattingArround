@@ -87,8 +87,13 @@ function House:new(_x, _y, _collider, _doorCollider)
             -- Movimiento Rectángulo Verde
             self.greenRectX = self.greenRectX + self.greenSpeed * dt
 
-            if self.greenRectX <= love.graphics.getWidth() / 2 - 150 or self.greenRectX + 10 >= love.graphics.getWidth() / 2 + 150 then
+            if self.greenRectX <= love.graphics.getWidth() / 2 - 150 --[[or self.greenRectX + 10 >= love.graphics.getWidth() / 2 + 150]] then
                 self.greenSpeed = -self.greenSpeed
+                self.greenRectX = self.greenRectX + 12
+            end
+            if self.greenRectX + 10 >= love.graphics.getWidth() / 2 + 150 then
+                self.greenSpeed = -self.greenSpeed
+                self.greenRectX = self.greenRectX - 12
             end
 
             -- SkillChecks
