@@ -24,7 +24,12 @@ function StaticGuard:update(dt)
 end
 
 function StaticGuard:draw()
-
+    local xx = self.position.x
+    local ox = self.origin.x
+    local yy = self.position.y
+    local oy = self.origin.y
+    local rr = self.rot
+    love.graphics.draw(self.image, xx, yy, rr, self.scale, 1, ox, oy)
 end
 
 return StaticGuard

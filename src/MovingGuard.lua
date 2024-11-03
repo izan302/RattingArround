@@ -9,12 +9,13 @@ local Rat = Rat or require "src/Rat"
 -- Self
 local MovingGuard = Actor:extend()
 
-function MovingGuard:new(_speed, _patrolPoints)
+function MovingGuard:new(_speed, _patrolPoints, _loop)
     MovingGuard.super.new(self, "src/textures/guard.png", _patrolPoints[1].x, _patrolPoints[1].y, _speed) -- El primer punto de patrol es el spawnpoint
     self.patrolPoints = _patrolPoints
     self.currentPoint = 1
     self.isGoingBack = false
     self.scale = 1
+    self.loop = _loop
 --[[===========================================================================================================
                                                 PATROLLING STATE
 ===============================================================================================================]]
@@ -97,16 +98,25 @@ self.stateMachine:addState("patrolling", {
 end
 
 function MovingGuard:arrivedAtPoint()
-    if self.currentPoint == #self.patrolPoints then
-        self.isGoingBack = true
-    elseif self.currentPoint == 1 then
-        self.isGoingBack = false
-    end
-    if self.isGoingBack then
-        self.currentPoint = self.currentPoint-1
+    if self.loop then
+        if self.currentPoint == #self.patrolPoints then
+            self.currentPoint = 1
+        else
+            self.currentPoint = self.currentPoint+1
+        end
     else
-        self.currentPoint = self.currentPoint+1
+        if self.currentPoint == #self.patrolPoints then
+            self.isGoingBack = true
+        elseif self.currentPoint == 1 then
+            self.isGoingBack = false
+        end
+        if self.isGoingBack then
+            self.currentPoint = self.currentPoint-1
+        else
+            self.currentPoint = self.currentPoint+1
+        end
     end
+    
     -- if Point is NOT infected house then move to door and changeState("guarding")
 end
 
