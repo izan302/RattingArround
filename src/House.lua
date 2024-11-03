@@ -151,6 +151,7 @@ function House:new(_x, _y, _collider, _doorCollider)
                     actor.stateMachine:changeState("playing")
                 end
             end
+            currentScore = currentScore + 1
         end,
         update = function(_, dt) -- Se ejecuta con cada update si el estado está activo
 

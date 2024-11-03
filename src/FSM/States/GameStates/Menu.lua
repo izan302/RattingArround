@@ -3,6 +3,7 @@ local Menu = Menu or require "src/menu"
 local MenuState = Object:extend()
 
 function MenuState:enter()
+    actorList = {}
     local menuOptions = {}
     self.background = love.graphics.newImage("src/textures/background.jpeg")
     table.insert(menuOptions, {text = "PLAY", type = "play", selectable = true})
@@ -19,7 +20,7 @@ end
 function MenuState:draw()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.draw(self.background, 0, 0, 0, 1, 0.5)
-    love.graphics.setColor(1, 0, 0, 1)
+    love.graphics.setColor(0, 0, 0, 1)
     for _, v in pairs(actorList) do
         v:draw()
     end
