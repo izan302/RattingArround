@@ -23,9 +23,10 @@ function Level:new(_map)
     h = map.height*32
     w = map.height*32
     love.window.setMode(w, h)
-    world:addCollisionClass("Rat")
     world:addCollisionClass("Wall")
     world:addCollisionClass("Door")
+    world:addCollisionClass("House")
+    world:addCollisionClass("Rat" , {ignores = {'House'}})
     self:loadColliders()
 end
 
@@ -51,20 +52,30 @@ function Level:loadColliders()
             newCollider:setCollisionClass("Wall")
         end
     end
-    for _, collider in pairs(map.layers["Doors"].objects) do
-        if collider.shape == "rectangle" then 
-            local newCollider = world:newRectangleCollider(collider.x, collider.y, collider.width, collider.height)
-            newCollider:setType("static")
-            newCollider:setCollisionClass("Door")
-        elseif collider.shape == "polygon" then
-            local newCollider = world:newPolygonCollider(collider.polygon)
-            newCollider:setType("static")
-            newCollider:setCollisionClass("Door")
-        end
-    end
+
     for _, collider in pairs(map.layers["Houses"].objects) do
         if collider.shape == "rectangle" then
-            table.insert(actorList, House(collider.x, collider.y, collider.width, collider.height))
+            for _, doorCollider in pairs(map.layers["Doors"].objects) do
+                if doorCollider.shape == "rectangle" then 
+                    if doorCollider.x <= collider.x+collider.width and doorCollider.x >= collider.x then
+                        if doorCollider.y <= collider.y+collider.height and doorCollider.y >= collider.y then
+                            local houseX = collider.x
+                            local houseY = collider.y
+                            local newCollider = world:newRectangleCollider(collider.x, collider.y, collider.width, collider.height)
+                            newCollider:setType("static")
+                            newCollider:setCollisionClass("House")
+
+                            doorCollider = world:newRectangleCollider(doorCollider.x, doorCollider.y, doorCollider.width, doorCollider.height)
+                            doorCollider:setType("static")
+                            doorCollider:setCollisionClass("Door")
+                            
+                            table.insert(actorList, House(houseX, houseY, newCollider, doorCollider))
+                        end
+                    end
+                    
+                end
+            end
+            
         end
     end
 end

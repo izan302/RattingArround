@@ -46,9 +46,16 @@ function PlayState:update(dt)
 end
 
 function PlayState:draw()
-    
-    for _, v in pairs(actorList) do
-        v:draw()
+    for _, v in ipairs(actorList) do
+        if v:is(Level) then
+            v:draw()
+        end
+    end
+
+    for _, v in ipairs(actorList) do
+        if not v:is(Level) then
+            v:draw()
+        end
     end
 end
 

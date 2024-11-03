@@ -121,9 +121,9 @@
   <object id="37" x="608.364" y="419.182" width="31.6364" height="8.54545"/>
  </objectgroup>
  <objectgroup id="7" name="Houses" opacity="0">
-  <object id="46" x="96" y="95" width="95.6667" height="97.3333"/>
-  <object id="48" x="95.6667" y="383.333" width="95.6667" height="97.3333"/>
-  <object id="49" x="544.5" y="64.6667" width="95.6667" height="97.3333"/>
-  <object id="50" x="576.167" y="350.667" width="95.6667" height="97.3333"/>
+  <object id="46" x="96" y="95" width="95.6667" height="97.667"/>
+  <object id="48" x="95.6667" y="383.333" width="95.6667" height="97.333"/>
+  <object id="49" x="544.5" y="64.6667" width="95.6667" height="97.3337"/>
+  <object id="50" x="576.167" y="350.667" width="95.6667" height="100"/>
  </objectgroup>
 </map>
