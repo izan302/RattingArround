@@ -19,6 +19,9 @@ function MovingGuard:new(_speed, _patrolPoints, _loop)
 
     self.conoLongitud = 150
     self.conoAngulo = 0.5
+
+    self.spinCooldownTimer = 0
+    self.spinCooldown = 0.3
 --[[===========================================================================================================
                                                 PATROLLING STATE
 ===============================================================================================================]]
@@ -27,6 +30,8 @@ self.stateMachine:addState("patrolling", {
 
     end,
     update = function(_, dt) -- Se ejecuta con cada update si el estado está activo
+        self.spinCooldownTimer = self.spinCooldownTimer + dt
+
         local PatrolDirectionX = self.patrolPoints[self.currentPoint].x - self.position.x
         local PatrolDirectionY = self.patrolPoints[self.currentPoint].y - self.position.y
         local distancia = math.sqrt(PatrolDirectionX * PatrolDirectionX + PatrolDirectionY * PatrolDirectionY)
@@ -42,6 +47,7 @@ self.stateMachine:addState("patrolling", {
             self.position = self.position + self.forward * self.speed * dt
         else
             self:arrivedAtPoint()
+            self.spinCooldownTimer = 0
         end
 
         for _,k in ipairs(actorList) do
@@ -50,7 +56,9 @@ self.stateMachine:addState("patrolling", {
                 local dotProduct = self.forward.x * dirToRat.x + self.forward.y * dirToRat.y
                 local angleToRat = math.acos(dotProduct)
                 if angleToRat <= self.conoAngulo and (k.position - self.position):len() <= self.conoLongitud and k.stateMachine:getCurrentStateName() == "playing" then
-                    stateMachine:changeState("gameOver")
+                    if self.spinCooldownTimer >= self.spinCooldown then
+                        stateMachine:changeState("gameOver")
+                    end
                 end
             end
         end

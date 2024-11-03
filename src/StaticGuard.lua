@@ -27,10 +27,15 @@ function StaticGuard:new(_x, _y, _lookingRight)
         self.forwardAlt = Vector(0, 1)
     end
     self.forward = self.forwardOriginal
+
+    self.spinCooldownTimer = 0
+    self.spinCooldown = 0.3
 end
 
 function StaticGuard:update(dt)
     self.changeDirectionCooldownTimer = self.changeDirectionCooldownTimer + dt
+    self.spinCooldownTimer = self.spinCooldownTimer + dt
+
     if self.changeDirectionCooldownTimer >= self.changeDirectionCooldown then
         if self.forward == self.forwardOriginal then
             self.forward = self.forwardAlt
@@ -38,6 +43,7 @@ function StaticGuard:update(dt)
             self.forward = self.forwardOriginal
         end
         self.changeDirectionCooldownTimer = 0
+        self.spinCooldownTimer = 0
     end
 
     for _,k in ipairs(actorList) do
@@ -47,7 +53,9 @@ function StaticGuard:update(dt)
             local angleToRat = math.acos(math.max(-1, math.min(1, dotProduct)))
 
             if angleToRat <= self.conoAngulo and (k.position - self.position):len() <= self.conoLongitud and k.stateMachine:getCurrentStateName() == "playing" then
-                stateMachine:changeState("gameOver")
+                if self.spinCooldownTimer >= self.spinCooldown then
+                    stateMachine:changeState("gameOver")
+                end
             end
         end
     end

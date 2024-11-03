@@ -14,7 +14,7 @@ function love.load()
   w, h = love.graphics.getDimensions()
 
   music = love.audio.newSource("src/Audios/MenuSound.wav","static")
-  music:setVolume(0.1) 
+  music:setVolume(0.1)
   love.audio.play(music)
 
   stateMachine = StateMachine()
