@@ -99,7 +99,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="5" name="Walls" opacity="0">
+ <objectgroup id="5" name="Walls">
   <object id="16" x="97" y="384.273" width="31.0909" height="96"/>
   <object id="17" x="160" y="383.773" width="32" height="96"/>
   <object id="18" x="97.5" y="384.273" width="94.5" height="65.5"/>
@@ -116,13 +116,13 @@
   <object id="39" x="-2" y="794" width="812" height="32"/>
   <object id="40" x="-7" y="-28" width="12" height="838"/>
   <object id="41" x="796" y="-17" width="42" height="838"/>
-  <object id="51" x="478.667" y="417.333" width="32" height="29.3333"/>
-  <object id="52" x="704" y="352" width="32" height="29.3333"/>
-  <object id="53" x="734.667" y="382.667" width="32" height="29.3333"/>
-  <object id="54" x="734.667" y="416" width="64" height="29.3333"/>
-  <object id="55" x="6.66667" y="414.667" width="88" height="29.3333"/>
-  <object id="56" x="158.667" y="354.667" width="32" height="29.3333"/>
-  <object id="57" x="192" y="126.667" width="32" height="29.3333"/>
+  <object id="51" x="483.394" y="419.333" width="25.4545" height="27.3333"/>
+  <object id="52" x="709.636" y="352" width="32.1818" height="27.5151"/>
+  <object id="53" x="741.758" y="380.122" width="26.1818" height="34.606"/>
+  <object id="54" x="741.212" y="416" width="57.4545" height="26"/>
+  <object id="55" x="6.66667" y="418.334" width="88" height="23"/>
+  <object id="56" x="163.212" y="354.667" width="26.1818" height="29.3333"/>
+  <object id="57" x="192" y="129.917" width="29" height="23.8333"/>
   <object id="58" x="352" y="64" width="32" height="29.3333"/>
  </objectgroup>
  <objectgroup id="6" name="Doors" opacity="0">
