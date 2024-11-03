@@ -51,6 +51,9 @@ end
 function Level:draw()
     map:draw(tx, ty)
     world:draw()
+    love.graphics.setColor(0, 0, 0, 0.5)
+    love.graphics.rectangle("fill", 0, 0, w, h)
+    love.graphics.setColor(1, 1, 1, 1)
 end
 
 function Level:loadColliders()

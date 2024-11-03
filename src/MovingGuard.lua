@@ -38,6 +38,16 @@ self.stateMachine:addState("patrolling", {
         end
     end,
     draw = function () -- Se ejecuta con cada draw si el estado está activo
+        
+        triangle1x = (math.cos(math.atan2(self.forward.y, self.forward.x)+0.5)*150)+self.position.x
+        triangle1y = (math.sin(math.atan2(self.forward.y, self.forward.x)+0.5)*150)+self.position.y
+        triangle2x = (math.cos(math.atan2(self.forward.y, self.forward.x)-0.5)*150)+self.position.x
+        triangle2y = (math.sin(math.atan2(self.forward.y, self.forward.x)-0.5)*150)+self.position.y
+        
+        love.graphics.setColor(1, 1, 0.2, 0.2)
+        love.graphics.polygon("fill", triangle1x,triangle1y,triangle2x,triangle2y,self.position.x,self.position.y)
+        love.graphics.setColor(1, 1, 1, 1)
+        
         local xx = self.position.x
         local ox = self.origin.x
         local yy = self.position.y

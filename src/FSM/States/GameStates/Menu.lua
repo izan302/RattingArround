@@ -4,6 +4,8 @@ local MenuState = Object:extend()
 
 function MenuState:enter()
     actorList = {}
+    local bienvenido = love.audio.newSource("src/Audios/mouse.wav","static")
+    love.audio.play(bienvenido)
     local menuOptions = {}
     self.background = love.graphics.newImage("src/textures/background.jpeg")
     table.insert(menuOptions, {text = "PLAY", type = "play", selectable = true})
