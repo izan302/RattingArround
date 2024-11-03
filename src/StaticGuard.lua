@@ -7,6 +7,7 @@ local Rat = Rat or require "src/Rat"
 
 -- Self
 local StaticGuard = Actor:extend()
+
 math.randomseed(os.time())
 function StaticGuard:new(_x, _y, _lookingRight)
     StaticGuard.super.new(self, "src/textures/guard.png", _x, _y, 0)

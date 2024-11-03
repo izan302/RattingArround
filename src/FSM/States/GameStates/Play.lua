@@ -35,7 +35,9 @@ function PlayState:update(dt)
     for _, v in pairs(actorList) do
         v:update(dt)
     end
+    print(currentScore, scoreObjective)
     if currentScore == scoreObjective then
+        print("win")
         stateMachine:changeState("win")
     end
 end
@@ -64,6 +66,7 @@ function PlayState:exit()
     w = 800
     h = 480
     love.window.setMode(w, h)
+    currentScore = 0
 end
 
 return PlayState
