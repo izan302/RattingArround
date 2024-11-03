@@ -16,6 +16,9 @@ function MovingGuard:new(_speed, _patrolPoints, _loop)
     self.isGoingBack = false
     self.scale = 1
     self.loop = _loop
+
+    self.conoLongitud = 150
+    self.conoAngulo = 0.5
 --[[===========================================================================================================
                                                 PATROLLING STATE
 ===============================================================================================================]]
@@ -40,14 +43,13 @@ self.stateMachine:addState("patrolling", {
         else
             self:arrivedAtPoint()
         end
-        local conoLongitud = 150 
-        local conoAngulo = 0.5 
+
         for _,k in ipairs(actorList) do
             if k:is(Rat) then
                 local dirToRat = Vector(k.position.x - self.position.x, k.position.y - self.position.y):normalized()
                 local dotProduct = self.forward.x * dirToRat.x + self.forward.y * dirToRat.y
                 local angleToRat = math.acos(dotProduct)
-                if angleToRat <= conoAngulo and (k.position - self.position):len() <= conoLongitud and k.stateMachine:getCurrentStateName() == "playing" then
+                if angleToRat <= self.conoAngulo and (k.position - self.position):len() <= self.conoLongitud and k.stateMachine:getCurrentStateName() == "playing" then
                     stateMachine:changeState("gameOver")
                 end
             end
@@ -56,10 +58,11 @@ self.stateMachine:addState("patrolling", {
     end,
     draw = function () -- Se ejecuta con cada draw si el estado está activo
 
-        local triangle1x = (math.cos(math.atan2(self.forward.y, self.forward.x)+0.5)*150)+self.position.x
-        local triangle1y = (math.sin(math.atan2(self.forward.y, self.forward.x)+0.5)*150)+self.position.y
-        local triangle2x = (math.cos(math.atan2(self.forward.y, self.forward.x)-0.5)*150)+self.position.x
-        local triangle2y = (math.sin(math.atan2(self.forward.y, self.forward.x)-0.5)*150)+self.position.y
+        local triangle1x = (math.cos(math.atan2(self.forward.y, self.forward.x)+self.conoAngulo)*self.conoLongitud)+self.position.x
+        local triangle1y = (math.sin(math.atan2(self.forward.y, self.forward.x)+self.conoAngulo)*self.conoLongitud)+self.position.y
+        local triangle2x = (math.cos(math.atan2(self.forward.y, self.forward.x)-self.conoAngulo)*self.conoLongitud)+self.position.x
+        local triangle2y = (math.sin(math.atan2(self.forward.y, self.forward.x)-self.conoAngulo)*self.conoLongitud)+self.position.y
+        
         love.graphics.setColor(1, 1, 0.2, 0.2)
         love.graphics.polygon("fill", triangle1x,triangle1y,triangle2x,triangle2y,self.position.x,self.position.y)
         love.graphics.setColor(1, 1, 1, 1)
