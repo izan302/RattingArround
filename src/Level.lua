@@ -40,6 +40,7 @@ function Level:new(_map)
     table.insert(patrolPoints, {x = 622, y = 472})
     table.insert(actorList, MovingGuard(64, patrolPoints))
 
+    table.insert(actorList, StaticGuard(623, 172, true))
     table.insert(actorList, Rat(w/2, h/4*3))
 end
 
@@ -51,7 +52,7 @@ end
 function Level:draw()
     map:draw(tx, ty)
     world:draw()
-    love.graphics.setColor(0, 0, 0, 0.5)
+    love.graphics.setColor(0, 0, 0, 0.4)
     love.graphics.rectangle("fill", 0, 0, w, h)
     love.graphics.setColor(1, 1, 1, 1)
 end
