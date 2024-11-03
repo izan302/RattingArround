@@ -23,21 +23,20 @@ end
 
 function PlayState:update(dt)
     -- TOOL for listing Guard points disable on release
-    self.toolCooldownTimer = self.toolCooldownTimer+dt
+    --[[self.toolCooldownTimer = self.toolCooldownTimer+dt
 
     if love.mouse.isDown(1) and self.toolCooldownTimer > self.toolCooldown then
         local mouseX, mouseY = love.mouse.getPosition()
         print("X: "..mouseX.." | Y: "..mouseY)
        -- print(map:convertPixelToTile(love.mouse.getPosition()))
         self.toolCooldownTimer = 0
-    end
+    end]]
     -- END of TOOL
     for _, v in pairs(actorList) do
         v:update(dt)
     end
     print(currentScore, scoreObjective)
     if currentScore == scoreObjective then
-        print("win")
         stateMachine:changeState("win")
     end
 end

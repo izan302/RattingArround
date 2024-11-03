@@ -64,6 +64,11 @@ function Intro:update(dt)
         end
         self.cooldownMouthTimer = 0
     end
+
+    if love.keyboard.isDown("escape") then
+        love.audio.stop()
+        stateMachine:changeState("menu")
+    end
 end
 
 function Intro:draw()
