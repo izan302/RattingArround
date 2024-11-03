@@ -30,6 +30,13 @@ function Menu:new(_fontFile, _titleText, _titleSize, _optionSize, _options)
     self.menuCooldownTime = 0.3
     
     self.writingInput = false
+
+    self.bienvenido = love.audio.newSource("src/Audios/mouse.wav","static")
+    self.music = love.audio.newSource("src/Audios/MenuSound.wav","static")
+    self.music:setVolume(0.1) 
+
+    love.audio.play(self.bienvenido)
+
     for k, v in ipairs(self.menuOptions) do
         if v.type == "input" then
             self.inputCharSelected = 1
@@ -42,7 +49,11 @@ function Menu:new(_fontFile, _titleText, _titleSize, _optionSize, _options)
     end
 end
 
+
+
 function Menu:update(dt)
+
+    love.audio.play(self.music)
     self.menuCooldown = self.menuCooldown+dt
     if self.menuOptions[self.choice].type == "input" then
         self.inputBlinkCooldown = self.inputBlinkCooldown+dt
