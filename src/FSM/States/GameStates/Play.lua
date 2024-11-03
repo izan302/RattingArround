@@ -14,6 +14,9 @@ local Level = Level or require "src/Level"
 -- Self
 local PlayState = Object:extend()
 
+-- Global
+scoreObjective = 0
+currentScore = 0
 function PlayState:enter()
     table.insert(actorList, Level("src/Maps/Map_1.lua"))
     love.graphics.setColor(1, 1, 1, 1)
@@ -25,6 +28,7 @@ end
 function PlayState:update(dt)
     -- TOOL for listing Guard points disable on release
     self.toolCooldownTimer = self.toolCooldownTimer+dt
+
     if love.mouse.isDown(1) and self.toolCooldownTimer > self.toolCooldown then
         local mouseX, mouseY = love.mouse.getPosition()
         print("X: "..mouseX.." | Y: "..mouseY)
@@ -34,6 +38,9 @@ function PlayState:update(dt)
     -- END of TOOL
     for _, v in pairs(actorList) do
         v:update(dt)
+    end
+    if currentScore == scoreObjective then
+        stateMachine:changeState("win")
     end
 end
 
@@ -52,7 +59,9 @@ function PlayState:draw()
 end
 
 function PlayState:exit()
-    
+    w = 800
+    h = 480
+    love.window.setMode(w, h)
 end
 
 return PlayState

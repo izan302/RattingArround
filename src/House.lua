@@ -25,6 +25,12 @@ function House:new(_x, _y, _collider, _doorCollider)
 
     self.infectedpoints = 0
     self.cooldownBoton = 1
+
+    self.failSkill = love.audio.newSource("src/Audios/failskill.wav","static")
+    self.correctskill = love.audio.newSource("src/Audios/correctskill.wav","static")
+    self.correctskill:setVolume(0.4) 
+
+
 --[[===========================================================================================================
                                                 IDLE STATE
 ===============================================================================================================]]
@@ -99,7 +105,7 @@ function House:new(_x, _y, _collider, _doorCollider)
                 if self.greenRectX < redColisionRect and greenColisionRect > self.redRectX and
                     self.greenRectY == self.redRectY then
                     self.infectedpoints = self.infectedpoints + 1
-                    print(self.infectedpoints)
+                    love.audio.play(self.correctskill)
                     self.cooldownBoton = 0
                     -- Cambia de posición el rectángulo rojo
                     self:redrawRedRect(love.graphics.getWidth() / 2 - 150, love.graphics.getHeight() / 2 - 10)
@@ -111,6 +117,7 @@ function House:new(_x, _y, _collider, _doorCollider)
                         self.greenSpeed = 100
                     end
                 else
+                    love.audio.play(self.failSkill)
                     self:redrawRedRect(love.graphics.getWidth() / 2 - 150, love.graphics.getHeight() / 2 - 10)
                     self.cooldownBoton = 0
                 end
@@ -151,6 +158,7 @@ function House:new(_x, _y, _collider, _doorCollider)
                     actor.stateMachine:changeState("playing")
                 end
             end
+            currentScore = currentScore + 1
         end,
         update = function(_, dt) -- Se ejecuta con cada update si el estado está activo
 
