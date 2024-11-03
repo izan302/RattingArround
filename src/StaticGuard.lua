@@ -11,7 +11,7 @@ local StaticGuard = Actor:extend()
 math.randomseed(os.time())
 function StaticGuard:new(_x, _y, _lookingRight)
     StaticGuard.super.new(self, "src/textures/guard.png", _x, _y, 0)
-    
+
     self.stateMachine = StateMachine()
     self.changeDirectionCooldown = math.random(5, 8) -- Tiempo que tarda en darse la vuelta EN SEGUNDOS
     self.changeDirectionCooldownTimer = love.math.random(0, 5)

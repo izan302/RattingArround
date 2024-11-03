@@ -69,7 +69,7 @@ self.stateMachine:addState("patrolling", {
         local triangle1y = (math.sin(math.atan2(self.forward.y, self.forward.x)+self.conoAngulo)*self.conoLongitud)+self.position.y
         local triangle2x = (math.cos(math.atan2(self.forward.y, self.forward.x)-self.conoAngulo)*self.conoLongitud)+self.position.x
         local triangle2y = (math.sin(math.atan2(self.forward.y, self.forward.x)-self.conoAngulo)*self.conoLongitud)+self.position.y
-        
+
         love.graphics.setColor(1, 1, 0.2, 0.2)
         love.graphics.polygon("fill", triangle1x,triangle1y,triangle2x,triangle2y,self.position.x,self.position.y)
         love.graphics.setColor(1, 1, 1, 1)

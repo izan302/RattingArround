@@ -178,7 +178,7 @@ function House:new(_x, _y, _collider, _doorCollider)
             love.graphics.draw(self.image, xx+self.width/2, yy+self.height/2, rr, 1, 1, ox, oy)
         end,
         exit = function()  -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState() a cualquier otro estado
-            
+
         end
     })
     -- Método para establecer la posición del rectángulo rojo

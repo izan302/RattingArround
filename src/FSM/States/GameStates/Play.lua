@@ -1,7 +1,5 @@
 --Librerias
 local Object = Object or require "lib/object"
-local Vector = Vector or require "lib/vector"
-
 
 --Dependencias
 local House = House or require "src/House"
@@ -16,7 +14,7 @@ currentScore = 0
 function PlayState:enter()
     table.insert(actorList, Level("src/Maps/Map_1.lua"))
     love.graphics.setColor(1, 1, 1, 1)
-    
+
     self.toolCooldown = 0.5
     self.toolCooldownTimer = 0.5 
 end
@@ -35,7 +33,7 @@ function PlayState:update(dt)
     for _, v in pairs(actorList) do
         v:update(dt)
     end
-    print(currentScore, scoreObjective)
+
     if currentScore == scoreObjective then
         stateMachine:changeState("win")
     end
