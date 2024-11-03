@@ -82,20 +82,4 @@ function Rat:new(_x, _y)
     self.stateMachine:changeState("playing") -- Hace que la rata empiece con el estado "playing"
 end
 
-function Rat:VisualCheck(vectorX, vectorY, enemyX, enemyY)
-    local ratVectorX = self.position.x-enemyX
-    local ratVectorY = self.position.y-enemyY
-    local distancia = math.sqrt(ratVectorX * ratVectorX + ratVectorY * ratVectorY)
-    local angle = math.atan2(ratVectorY, ratVectorX) - math.atan2(vectorY, vectorX);
-
-    if distancia < 150 then 
-        if angle < 0.5 and angle > -0.5 then
-            if self.stateMachine:getCurrentStateName() == "playing" then
-                stateMachine:changeState("gameOver")
-            end
-        end
-    end
-
-end
-
 return Rat

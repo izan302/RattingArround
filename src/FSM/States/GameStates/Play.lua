@@ -46,13 +46,19 @@ end
 
 function PlayState:draw()
     for _, v in ipairs(actorList) do
-        if v:is(Level) then
+        if v:is(Level)  then
             v:draw()
         end
     end
 
     for _, v in ipairs(actorList) do
-        if not v:is(Level) then
+        if v:is(House)  then
+            v:draw()
+        end
+    end
+
+    for _, v in ipairs(actorList) do
+        if not v:is(Level) and not v:is(House) then
             v:draw()
         end
     end

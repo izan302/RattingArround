@@ -129,11 +129,14 @@ function House:new(_x, _y, _collider, _doorCollider)
         draw = function()  -- Se ejecuta con cada draw si el estado está activo
 
         -- Dibuja el fondo (rectángulo blanco)
+        love.graphics.setFont(love.graphics.newFont("Menu.ttf", 30))
             love.graphics.setColor(1, 1, 1)
             local posX = love.graphics.getWidth() / 2 - 150
             local posY = love.graphics.getHeight() / 2 - 10
             love.graphics.rectangle("fill", posX, posY, 300, 20)
             love.graphics.printf(self.infectedGoal-self.infectedpoints, 0, posY-50, w, "center")
+            love.graphics.setFont(love.graphics.newFont("Menu.ttf", 20))
+            love.graphics.printf("PRESS \"SPACE\" WHEN THE GREEN SQUARE IS IN THE RED SQUARE", 0, posY+50, w, "center")
 
             -- Rectángulo Rojo
             love.graphics.setColor(1, 0, 0)
