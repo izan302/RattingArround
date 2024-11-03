@@ -38,8 +38,18 @@ function Level:new(_map)
     table.insert(patrolPoints, {x = 380, y = 534})
     table.insert(patrolPoints, {x = 148, y = 501})
     table.insert(patrolPoints, {x = 622, y = 472})
-    table.insert(actorList, MovingGuard(64, patrolPoints))
+    table.insert(actorList, MovingGuard(64, patrolPoints, false))
 
+    table.insert(actorList, StaticGuard(623, 172, true))
+    table.insert(actorList, StaticGuard(106, 204, false))
+    table.insert(actorList, StaticGuard(176, 492, true))
+
+    patrolPoints = {}
+    table.insert(patrolPoints, {x = 557, y = 458})
+    table.insert(patrolPoints, {x = 681, y = 469})
+    table.insert(patrolPoints, {x = 688, y = 342})
+    table.insert(patrolPoints, {x = 562, y = 336})
+    table.insert(actorList, MovingGuard(64, patrolPoints, true))
     table.insert(actorList, Rat(w/2, h/4*3))
 end
 
@@ -50,7 +60,9 @@ end
 
 function Level:draw()
     map:draw(tx, ty)
-    world:draw()
+    love.graphics.setColor(0, 0, 0, 0.4)
+    love.graphics.rectangle("fill", 0, 0, w, h)
+    love.graphics.setColor(1, 1, 1, 1)
 end
 
 function Level:loadColliders()

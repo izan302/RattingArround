@@ -30,15 +30,19 @@ function Rat:new(_x, _y)
             local velocidadY = 0
             if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
                 velocidadY = self.speed * -1
+                self.rot = 0
             end
             if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
-                velocidadY = self.speed           
+                velocidadY = self.speed
+                self.rot = math.rad(180)
             end
             if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
                 velocidadX = self.speed
+                self.rot = math.rad(90)
             end
             if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
                 velocidadX = self.speed * -1
+                self.rot = math.rad(-90)
             end
             self.collider:setLinearVelocity(velocidadX, velocidadY)
         end,
@@ -68,12 +72,7 @@ function Rat:new(_x, _y)
             end
         end,
         draw = function () -- Se ejecuta con cada draw si el estado está activo
-            local xx = self.position.x
-            local ox = self.origin.x
-            local yy = self.position.y
-            local oy = self.origin.y
-            local rr = self.rot
-            love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
+
         end,
         exit = function () -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState() a cualquier otro estado
 
@@ -88,20 +87,12 @@ function Rat:VisualCheck(vectorX, vectorY, enemyX, enemyY)
     local ratVectorY = self.position.y-enemyY
     local distancia = math.sqrt(ratVectorX * ratVectorX + ratVectorY * ratVectorY)
     local angle = math.atan2(ratVectorY, ratVectorX) - math.atan2(vectorY, vectorX);
-    local triangle1x, triangle1y, triangle2x, triangle2y 
-    --triangle1x = math.cos(math.atan2(vectorY, vectorX)+1)+enemyX
-    --triangle1y = math.sin(math.atan2(vectorY, vectorX)+1)+enemyY
-    --triangle2x = math.cos(math.atan2(vectorY, vectorX)-1)+enemyX
-    --triangle2y = math.sin(math.atan2(vectorY, vectorX)-1)+enemyY
-    --print(triangle1x.."---"..triangle1y.."---"..enemyX.."---"..enemyY)
-
-    --love.graphics.polygon("fill",triangle1x,triangle1y,triangle2x,triangle2y,enemyX,enemyY)
 
     if distancia < 150 then 
         if angle < 0.5 and angle > -0.5 then
-        print("dead")
-        else
-        print("safe")
+            if self.stateMachine:getCurrentStateName() == "playing" then
+                stateMachine:changeState("gameOver")
+            end
         end
     end
 

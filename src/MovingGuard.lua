@@ -9,18 +9,19 @@ local Rat = Rat or require "src/Rat"
 -- Self
 local MovingGuard = Actor:extend()
 
-function MovingGuard:new(_speed, _patrolPoints)
+function MovingGuard:new(_speed, _patrolPoints, _loop)
     MovingGuard.super.new(self, "src/textures/guard.png", _patrolPoints[1].x, _patrolPoints[1].y, _speed) -- El primer punto de patrol es el spawnpoint
     self.patrolPoints = _patrolPoints
     self.currentPoint = 1
     self.isGoingBack = false
     self.scale = 1
+    self.loop = _loop
 --[[===========================================================================================================
                                                 PATROLLING STATE
 ===============================================================================================================]]
 self.stateMachine:addState("patrolling", {
     enter = function() -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState("patrolling
-        
+
     end,
     update = function(_, dt) -- Se ejecuta con cada update si el estado está activo
         local PatrolDirectionX = self.patrolPoints[self.currentPoint].x - self.position.x
@@ -39,7 +40,7 @@ self.stateMachine:addState("patrolling", {
         else
             self:arrivedAtPoint()
         end
-        
+
         for _,k in ipairs(actorList) do
             if k:is(Rat) then
                 k:VisualCheck(self.forward.x, self.forward.y, self.position.x, self.position.y)
@@ -48,15 +49,16 @@ self.stateMachine:addState("patrolling", {
 
     end,
     draw = function () -- Se ejecuta con cada draw si el estado está activo
-        
+
         triangle1x = (math.cos(math.atan2(self.forward.y, self.forward.x)+0.5)*150)+self.position.x
         triangle1y = (math.sin(math.atan2(self.forward.y, self.forward.x)+0.5)*150)+self.position.y
         triangle2x = (math.cos(math.atan2(self.forward.y, self.forward.x)-0.5)*150)+self.position.x
         triangle2y = (math.sin(math.atan2(self.forward.y, self.forward.x)-0.5)*150)+self.position.y
-        print(triangle1x.."---"..triangle1y.."---"..self.position.x.."---"..self.position.y)
-        love.graphics.polygon("line", triangle1x,triangle1y,triangle2x,triangle2y,self.position.x,self.position.y)
-        
-        
+
+        love.graphics.setColor(1, 1, 0.2, 0.2)
+        love.graphics.polygon("fill", triangle1x,triangle1y,triangle2x,triangle2y,self.position.x,self.position.y)
+        love.graphics.setColor(1, 1, 1, 1)
+
         local xx = self.position.x
         local ox = self.origin.x
         local yy = self.position.y
@@ -96,16 +98,25 @@ self.stateMachine:addState("patrolling", {
 end
 
 function MovingGuard:arrivedAtPoint()
-    if self.currentPoint == #self.patrolPoints then
-        self.isGoingBack = true
-    elseif self.currentPoint == 1 then
-        self.isGoingBack = false
-    end
-    if self.isGoingBack then
-        self.currentPoint = self.currentPoint-1
+    if self.loop then
+        if self.currentPoint == #self.patrolPoints then
+            self.currentPoint = 1
+        else
+            self.currentPoint = self.currentPoint+1
+        end
     else
-        self.currentPoint = self.currentPoint+1
+        if self.currentPoint == #self.patrolPoints then
+            self.isGoingBack = true
+        elseif self.currentPoint == 1 then
+            self.isGoingBack = false
+        end
+        if self.isGoingBack then
+            self.currentPoint = self.currentPoint-1
+        else
+            self.currentPoint = self.currentPoint+1
+        end
     end
+    
     -- if Point is NOT infected house then move to door and changeState("guarding")
 end
 

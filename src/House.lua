@@ -24,13 +24,13 @@ function House:new(_x, _y, _collider, _doorCollider)
     self.greenSpeed = 100 -- Velocidad en píxeles por segundo
 
     self.infectedpoints = 0
+    self.infectedGoal = 5
     self.cooldownBoton = 1
 
     self.failSkill = love.audio.newSource("src/Audios/failskill.wav","static")
     self.correctskill = love.audio.newSource("src/Audios/correctskill.wav","static")
     self.correctskill:setVolume(0.4) 
-
-
+    
 --[[===========================================================================================================
                                                 IDLE STATE
 ===============================================================================================================]]
@@ -111,7 +111,7 @@ function House:new(_x, _y, _collider, _doorCollider)
                     self:redrawRedRect(love.graphics.getWidth() / 2 - 150, love.graphics.getHeight() / 2 - 10)
 
                     self.greenSpeed = self.greenSpeed * 1.4
-                    if self.infectedpoints >= 5 then
+                    if self.infectedpoints >= self.infectedGoal then
                         self.stateMachine:changeState("infected")
                         self.infectedpoints = 0
                         self.greenSpeed = 100
@@ -127,13 +127,14 @@ function House:new(_x, _y, _collider, _doorCollider)
             end
         end,
         draw = function()  -- Se ejecuta con cada draw si el estado está activo
-            -- Dibuja el fondo (rectángulo blanco)
-            
+
+        -- Dibuja el fondo (rectángulo blanco)
             love.graphics.setColor(1, 1, 1)
             local posX = love.graphics.getWidth() / 2 - 150
             local posY = love.graphics.getHeight() / 2 - 10
             love.graphics.rectangle("fill", posX, posY, 300, 20)
-            
+            love.graphics.printf(self.infectedGoal-self.infectedpoints, 0, posY-50, w, "center")
+
             -- Rectángulo Rojo
             love.graphics.setColor(1, 0, 0)
             love.graphics.rectangle("fill", self.redRectX, self.redRectY, 30, 20)
