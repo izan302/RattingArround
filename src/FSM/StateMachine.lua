@@ -39,6 +39,9 @@ function StateMachine:draw()
     if self.currentState and self.currentState.draw then
         self.currentState:draw()
     end
+    if self:is(House) then
+        self.currentState.draw()
+    end
 end
 
 function StateMachine:getCurrentStateName()

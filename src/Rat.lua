@@ -11,15 +11,16 @@ local Rat = Actor:extend()
 function Rat:new(_x, _y)
     Rat.super.new(self, "src/textures/rat.png", _x, _y, 128)
     self.rot = 0
-    self.collider = world:newBSGRectangleCollider(self.position.x, self.position.y, self.width/2, self.height, 5)
+    self.collider = world:newBSGRectangleCollider(self.position.x, self.position.y, self.width/2, self.height/2, 5)
     self.collider:setFixedRotation(true)
     self.collider:setCollisionClass("Rat")
+
 --[[===========================================================================================================
                                             PLAYING STATE
 ===============================================================================================================]]
     self.stateMachine:addState("playing", {
         enter = function() -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState("playing")
-            self.forward = Vector(0,0)
+            self.forward = Vector(0, 0)
         end,
         update = function(_, dt) -- Se ejecuta con cada update si el estado está activo
             self.position.x = self.collider:getX()
@@ -39,9 +40,6 @@ function Rat:new(_x, _y)
             if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
                 velocidadX = self.speed * -1
             end
-            if self.collider:enter("Door") then
-                self.stateMachine:changeState("infecting")
-            end
             self.collider:setLinearVelocity(velocidadX, velocidadY)
         end,
         draw = function () -- Se ejecuta con cada draw si el estado está activo
@@ -51,7 +49,6 @@ function Rat:new(_x, _y)
             local oy = self.origin.y
             local rr = self.rot
             love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
-            
         end,
         exit = function () -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState() a cualquier otro estado
 

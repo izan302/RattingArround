@@ -14,6 +14,7 @@ function MovingGuard:new(_speed, _patrolPoints)
     self.patrolPoints = _patrolPoints
     self.currentPoint = 1
     self.isGoingBack = false
+    self.scale = 1
 --[[===========================================================================================================
                                                 PATROLLING STATE
 ===============================================================================================================]]
@@ -29,7 +30,11 @@ self.stateMachine:addState("patrolling", {
         self.forward.y = PatrolDirectionY / distancia
         if distancia > 1 then
             self.forward = Vector(self.forward.x, self.forward.y)
-            self.rot = math.atan2(PatrolDirectionY, PatrolDirectionX)
+            if self.position.x > self.patrolPoints[self.currentPoint].x then
+                self.scale = -1
+            else 
+                self.scale = 1
+            end
             self.position = self.position + self.forward * self.speed * dt
         else
             self:arrivedAtPoint()
@@ -48,7 +53,7 @@ self.stateMachine:addState("patrolling", {
         local yy = self.position.y
         local oy = self.origin.y
         local rr = self.rot
-        love.graphics.draw(self.image, xx, yy, rr, 1, 1, ox, oy)
+        love.graphics.draw(self.image, xx, yy, rr, self.scale, 1, ox, oy)
     end,
     exit = function () -- Se ejecuta 1 vez, al hacer self.stateMachine:changeState() a cualquier otro estado
 
