@@ -24,6 +24,8 @@ function Level:new(_map)
     world:addCollisionClass("Door")
     world:addCollisionClass("House")
     world:addCollisionClass("Rat" , {ignores = {'House'}})
+
+    scoreObjective = 0
     self:loadColliders()
 
     patrolPoints = {}

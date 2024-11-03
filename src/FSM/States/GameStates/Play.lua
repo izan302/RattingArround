@@ -67,7 +67,6 @@ function PlayState:exit()
     h = 480
     love.window.setMode(w, h)
     currentScore = 0
-    scoreObjective = 0
 end
 
 return PlayState
