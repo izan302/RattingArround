@@ -88,9 +88,17 @@ function Rat:VisualCheck(vectorX, vectorY, enemyX, enemyY)
     local ratVectorY = self.position.y-enemyY
     local distancia = math.sqrt(ratVectorX * ratVectorX + ratVectorY * ratVectorY)
     local angle = math.atan2(ratVectorY, ratVectorX) - math.atan2(vectorY, vectorX);
-    
+    local triangle1x, triangle1y, triangle2x, triangle2y 
+    --triangle1x = math.cos(math.atan2(vectorY, vectorX)+1)+enemyX
+    --triangle1y = math.sin(math.atan2(vectorY, vectorX)+1)+enemyY
+    --triangle2x = math.cos(math.atan2(vectorY, vectorX)-1)+enemyX
+    --triangle2y = math.sin(math.atan2(vectorY, vectorX)-1)+enemyY
+    --print(triangle1x.."---"..triangle1y.."---"..enemyX.."---"..enemyY)
+
+    --love.graphics.polygon("fill",triangle1x,triangle1y,triangle2x,triangle2y,enemyX,enemyY)
+
     if distancia < 150 then 
-        if angle < 1 and angle > -1 then
+        if angle < 0.5 and angle > -0.5 then
         print("dead")
         else
         print("safe")
