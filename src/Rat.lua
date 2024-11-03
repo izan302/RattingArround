@@ -1,5 +1,4 @@
 -- Librerías
-local Object = Object or require "lib/object"
 local Vector = Vector or require "lib/vector"
 
 -- Dependencias

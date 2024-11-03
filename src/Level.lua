@@ -6,7 +6,6 @@ local WindField = WindField or require "lib/windfield"
 
 -- Dependencias
 local Actor = Actor or require "src/Actor"
-local Actor = Actor or require "src/actor"
 local Rat = Rat or require "src/Rat"
 local StaticGuard = StaticGuard or require "src/StaticGuard"
 local MovingGuard = MovingGuard or require "src/MovingGuard"

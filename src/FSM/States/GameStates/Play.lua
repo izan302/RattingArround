@@ -4,10 +4,6 @@ local Vector = Vector or require "lib/vector"
 
 
 --Dependencias
-local Actor = Actor or require "src/actor"
-local Rat = Rat or require "src/Rat"
-local StaticGuard = StaticGuard or require "src/StaticGuard"
-local MovingGuard = MovingGuard or require "src/MovingGuard"
 local House = House or require "src/House"
 local Level = Level or require "src/Level"
 
