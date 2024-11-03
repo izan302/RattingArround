@@ -83,6 +83,7 @@ function Level:loadColliders()
                             doorCollider:setCollisionClass("Door")
                             
                             table.insert(actorList, House(houseX, houseY, newCollider, doorCollider))
+                            scoreObjective = scoreObjective+1
                         end
                     end
                     
