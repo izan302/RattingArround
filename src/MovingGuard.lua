@@ -40,10 +40,16 @@ self.stateMachine:addState("patrolling", {
         else
             self:arrivedAtPoint()
         end
-
+        local conoLongitud = 150 
+        local conoAngulo = 0.5 
         for _,k in ipairs(actorList) do
             if k:is(Rat) then
-                k:VisualCheck(self.forward.x, self.forward.y, self.position.x, self.position.y)
+                local dirToRat = Vector(k.position.x - self.position.x, k.position.y - self.position.y):normalized()
+                local dotProduct = self.forward.x * dirToRat.x + self.forward.y * dirToRat.y
+                local angleToRat = math.acos(dotProduct)
+                if angleToRat <= conoAngulo and (k.position - self.position):len() <= conoLongitud and k.stateMachine:getCurrentStateName() == "playing" then
+                    stateMachine:changeState("gameOver")
+                end
             end
         end
 

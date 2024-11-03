@@ -40,9 +40,9 @@ function Level:new(_map)
     table.insert(patrolPoints, {x = 622, y = 472})
     table.insert(actorList, MovingGuard(64, patrolPoints, false))
 
-    table.insert(actorList, StaticGuard(623, 172, true))
-    table.insert(actorList, StaticGuard(106, 204, false))
-    table.insert(actorList, StaticGuard(176, 492, true))
+    table.insert(actorList, StaticGuard(623, 172, false))
+    table.insert(actorList, StaticGuard(106, 204, true))
+    table.insert(actorList, StaticGuard(176, 492, false))
 
     patrolPoints = {}
     table.insert(patrolPoints, {x = 557, y = 458})
