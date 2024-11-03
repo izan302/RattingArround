@@ -30,15 +30,19 @@ function Rat:new(_x, _y)
             local velocidadY = 0
             if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
                 velocidadY = self.speed * -1
+                self.rot = 0
             end
             if love.keyboard.isDown("s") or love.keyboard.isDown("down") then
-                velocidadY = self.speed           
+                velocidadY = self.speed
+                self.rot = math.rad(180)
             end
             if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
                 velocidadX = self.speed
+                self.rot = math.rad(90)
             end
             if love.keyboard.isDown("a") or love.keyboard.isDown("left") then
                 velocidadX = self.speed * -1
+                self.rot = math.rad(-90)
             end
             self.collider:setLinearVelocity(velocidadX, velocidadY)
         end,
