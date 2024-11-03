@@ -17,15 +17,7 @@ local PlayState = Object:extend()
 function PlayState:enter()
     table.insert(actorList, Level("src/Maps/Map_1.lua"))
     love.graphics.setColor(1, 1, 1, 1)
-
-    patrolPoints = {}
-    table.insert(patrolPoints, {x = 143, y = 206})
-    table.insert(patrolPoints, {x = 591, y = 172})
-    table.insert(patrolPoints, {x = 143, y = 491})
-    table.insert(patrolPoints, {x = 623, y = 460})
-    table.insert(actorList, MovingGuard(64, patrolPoints))
-
-    table.insert(actorList, Rat(w/2, h/4*3))
+    
     self.toolCooldown = 0.5
     self.toolCooldownTimer = 0.5 
 end

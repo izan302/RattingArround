@@ -28,6 +28,19 @@ function Level:new(_map)
     world:addCollisionClass("House")
     world:addCollisionClass("Rat" , {ignores = {'House'}})
     self:loadColliders()
+
+    patrolPoints = {}
+    table.insert(patrolPoints, {x = 120, y = 208})
+    table.insert(patrolPoints, {x = 248, y = 208})
+    table.insert(patrolPoints, {x = 373, y = 342})
+    table.insert(patrolPoints, {x = 585, y = 178})
+    table.insert(patrolPoints, {x = 380, y = 326})
+    table.insert(patrolPoints, {x = 380, y = 534})
+    table.insert(patrolPoints, {x = 148, y = 501})
+    table.insert(patrolPoints, {x = 622, y = 472})
+    table.insert(actorList, MovingGuard(64, patrolPoints))
+
+    table.insert(actorList, Rat(w/2, h/4*3))
 end
 
 function Level:update(dt)
