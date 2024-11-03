@@ -99,7 +99,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="5" name="Walls">
+ <objectgroup id="5" name="Walls" opacity="0">
   <object id="16" x="97" y="384.273" width="31.0909" height="96"/>
   <object id="17" x="160" y="383.773" width="32" height="96"/>
   <object id="18" x="97.5" y="384.273" width="94.5" height="65.5"/>

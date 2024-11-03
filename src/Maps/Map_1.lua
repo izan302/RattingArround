@@ -217,7 +217,7 @@ return {
       name = "Walls",
       class = "",
       visible = true,
-      opacity = 1,
+      opacity = 0,
       offsetx = 0,
       offsety = 0,
       parallaxx = 1,
