@@ -16,7 +16,7 @@ local PlayState = Object:extend()
 
 -- Global
 scoreObjective = 0
-currentScore = 3
+currentScore = 0
 function PlayState:enter()
     table.insert(actorList, Level("src/Maps/Map_1.lua"))
     love.graphics.setColor(1, 1, 1, 1)
