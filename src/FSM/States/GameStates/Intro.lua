@@ -6,7 +6,7 @@ function Intro:enter()
     self.ratNormal = love.graphics.newImage("src/textures/ratinicio.png")
     self.ratPointing = love.graphics.newImage("src/textures/ratpoint.png")
     self.ratGun = love.graphics.newImage("src/textures/ratgun.png")
-    
+
     self.picture = self.ratNormal
 
     self.mouthHeight = 5
@@ -76,6 +76,7 @@ function Intro:draw()
     love.graphics.setColor(0, 0, 0, 1)
     love.graphics.rectangle("fill", self.mouthPosX, self.mouthPosY, 20, self.mouthHeight)
     love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.printf("ESC to skip intro", 0, 0, w, "left")
 end
 
 function Intro:exit()
