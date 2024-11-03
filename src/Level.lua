@@ -93,15 +93,13 @@ function Level:loadColliders()
                             doorCollider = world:newRectangleCollider(doorCollider.x, doorCollider.y, doorCollider.width, doorCollider.height)
                             doorCollider:setType("static")
                             doorCollider:setCollisionClass("Door")
-                            
+
                             table.insert(actorList, House(houseX, houseY, newCollider, doorCollider))
                             scoreObjective = scoreObjective+1
                         end
                     end
-                    
                 end
             end
-            
         end
     end
 end

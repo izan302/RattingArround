@@ -124,7 +124,6 @@ function MovingGuard:arrivedAtPoint()
             self.currentPoint = self.currentPoint+1
         end
     end
-    
     -- if Point is NOT infected house then move to door and changeState("guarding")
 end
 
