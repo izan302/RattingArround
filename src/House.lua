@@ -28,6 +28,8 @@ function House:new(_x, _y, _collider, _doorCollider)
 
     self.failSkill = love.audio.newSource("src/Audios/failskill.wav","static")
     self.correctskill = love.audio.newSource("src/Audios/correctskill.wav","static")
+    self.correctskill:setVolume(0.4) 
+
 
 --[[===========================================================================================================
                                                 IDLE STATE
@@ -99,7 +101,7 @@ function House:new(_x, _y, _collider, _doorCollider)
             self.cooldownBoton = self.cooldownBoton + dt
 
             -- Verifica si el espacio se presiona cuando el rectángulo verde está sobre el rojo
-            if love.keyboard.isDown("space") and self.cooldownBoton > 1.1 then
+            if love.keyboard.isDown("space") and self.cooldownBoton > 1 then
                 if self.greenRectX < redColisionRect and greenColisionRect > self.redRectX and
                     self.greenRectY == self.redRectY then
                     self.infectedpoints = self.infectedpoints + 1
